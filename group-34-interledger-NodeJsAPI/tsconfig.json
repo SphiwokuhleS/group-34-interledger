@@ -1,18 +1,19 @@
 {
   "compilerOptions": {
-    /* Language and Environment */
-    "target": "es2016",                             
-    "module": "commonjs",                            
-    "outDir": "./dist",                              
-    "esModuleInterop": true,                         
-    "forceConsistentCasingInFileNames": true,
-    
-    /* Enable Decorators */
-    "experimentalDecorators": true,                 /* Enable experimental support for decorators */
-    "emitDecoratorMetadata": true,                  /* Emit design-type metadata for decorated declarations */
-
-    /* Type Checking */
-    "strict": true,                                 
-    "skipLibCheck": true                            
-  }
+    "target": "es2018",
+    "module": "commonjs",
+    "lib": ["es2018", "esnext.asynciterable"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

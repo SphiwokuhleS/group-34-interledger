@@ -3,7 +3,8 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeor
 export enum BillingType {
     Hourly = 0,
     Daily = 1,
-    Monthly = 2
+    Weekly = 2,
+    Monthly = 3
 }
 
 @Entity()

@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from 'typeorm';
-import { FileMetaData } from './FileMetaData';
+import { FileMetaData } from './file-meta-data';
 
 
 @Entity()
@@ -9,8 +9,8 @@ export class FileAccessed {
 
     
     @ManyToOne(() => FileMetaData, fileMetaData => fileMetaData.fileAccesses)
-    fileMetaData!: FileMetaData;
+    fileId!: FileMetaData;
 
     @CreateDateColumn({ type: 'timestamp' })
-    createdAt!: Date;
+    accessedDate!: Date;
 }
