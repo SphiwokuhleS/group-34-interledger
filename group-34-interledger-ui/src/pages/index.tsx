@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/card"
 import { Header } from "@/components/home-page-components/header.component"
 import { RegistrationForm } from "@/components/home-page-components/registration-form.component"
-// import { FileUpload } from "@/components/ui/home-page-components/file-upload.component"
+// import { FileUpload } from "@/components/home-page-components/file-upload.component"
 import { FeaturesList } from "@/components/home-page-components/features-list.component"
 import { UserModel } from '@/models/user-model'
 
