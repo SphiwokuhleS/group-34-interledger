@@ -16,6 +16,9 @@ export class FileMetaData {
     FileName!: string;
 
     @Column()
+    FileUrl!: string;
+
+    @Column()
     FileSize!: number;
 
     @Column({
