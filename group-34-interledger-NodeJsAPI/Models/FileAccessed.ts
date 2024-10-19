@@ -1,16 +1,16 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from 'typeorm';
 import { FileMetaData } from './FileMetaData';
 
 
 @Entity()
 export class FileAccessed {
     @PrimaryGeneratedColumn()
-    Id: number;
+    Id!: number;
 
     
     @ManyToOne(() => FileMetaData, fileMetaData => fileMetaData.fileAccesses)
-    fileMetaData: FileMetaData;
+    fileMetaData!: FileMetaData;
 
     @CreateDateColumn({ type: 'timestamp' })
-    createdAt: Date;
+    createdAt!: Date;
 }

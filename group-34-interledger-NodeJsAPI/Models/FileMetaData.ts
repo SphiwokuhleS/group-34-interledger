@@ -1,6 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn } from 'typeorm';
 import { FileAccessed } from './FileAccessed';
-
 
 export enum FileTypes {
     Photo = 0,
@@ -11,27 +10,24 @@ export enum FileTypes {
 @Entity()
 export class FileMetaData {
     @PrimaryGeneratedColumn()
-    Id: number;
+    Id!: number;
 
     @Column()
-    FileName: string;
+    FileName!: string;
 
     @Column()
-    FileSize: number;
-
-    @Column()
-    Email: string;
+    FileSize!: number;
 
     @Column({
         type: "enum",
         enum: FileTypes,
-        FileTypes: FileTypes.Document
+        default: FileTypes.Document
     })
-    FileTypes: FileTypes;
+    FileTypes!: FileTypes;
 
     @OneToMany(() => FileAccessed, fileAccessed => fileAccessed.fileMetaData)
-    fileAccesses: FileAccessed[];
+    fileAccesses!: FileAccessed[];
 
     @CreateDateColumn({ type: 'timestamp' })
-    createdAt: Date;
+    createdAt!: Date;
 }

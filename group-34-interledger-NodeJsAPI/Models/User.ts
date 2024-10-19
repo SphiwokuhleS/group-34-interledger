@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
 
 export enum BillingType {
     Hourly = 0,
@@ -9,24 +9,24 @@ export enum BillingType {
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
-    Id: number;
+    Id!: number;
 
     @Column()
-    FirstName: string;
+    FirstName!: string;
 
     @Column()
-    LastName: string;
+    LastName!: string;
 
     @Column()
-    Email: string;
+    Email!: string;
 
     @Column({
         type: "enum",
         enum: BillingType,
         default: BillingType.Hourly
     })
-    BillingType: BillingType;
+    BillingType!: BillingType;
 
     @CreateDateColumn({ type: 'timestamp' })
-    createdAt: Date;
+    createdAt!: Date;
 }
