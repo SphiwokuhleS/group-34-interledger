@@ -1,8 +1,8 @@
 import React from 'react'
-import { Button } from "@/components/button"
-import { Input } from "@/components/input"
-import { Label } from "@/components/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/select"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { RegistrationFormModel } from '@/models/registration-form-model'
 
 export const RegistrationForm = ({ user, setUser, onSubmit }: RegistrationFormModel) => (
