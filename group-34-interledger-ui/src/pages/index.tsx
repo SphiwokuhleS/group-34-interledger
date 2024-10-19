@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import {
   Card,
   CardContent,
@@ -11,22 +11,18 @@ import {
 import { Header } from "@/components/home-page-components/header.component";
 import { RegistrationForm } from "@/components/home-page-components/registration-form.component";
 import { FeaturesList } from "@/components/home-page-components/features-list.component";
-import { UserModel } from "@/models/user-model";
+import { useUserState } from "@/context/user-context";
+import { completeUser } from "@/lib/utils";
+import router from "next/router";
 
 export default function HomePage() {
-  const [user, setUser] = useState<UserModel>({
-    firstName: "",
-    lastName: "",
-    email: "",
-    billingSchedule: "",
-    walletAddress: "",
-  });
-  const [isRegistered, setIsRegistered] = useState(false);
+  const { user, setUser } = useUserState();
 
   const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (user.firstName && user.billingSchedule) {
-      setIsRegistered(true);
+    if (user && completeUser(user)) {
+      setUser({ ...user, registered: true });
+      router.push("/dashboard");
     }
   };
 
@@ -42,20 +38,11 @@ export default function HomePage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            {!isRegistered ? (
-              <RegistrationForm
-                user={user}
-                setUser={setUser}
-                onSubmit={handleRegister}
-              />
-            ) : (
-              <div className="space-y-4">
-                <p className="text-green-600 font-semibold">
-                  Welcome, {user.firstName}!
-                </p>
-                <p>Your billing schedule: {user.billingSchedule}</p>
-              </div>
-            )}
+            <RegistrationForm
+              user={user}
+              setUser={setUser}
+              onSubmit={handleRegister}
+            />
           </CardContent>
         </Card>
         <Card>
