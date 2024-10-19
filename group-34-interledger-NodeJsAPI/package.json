@@ -2,21 +2,30 @@
   "name": "group-34-interkedger-nodejsapi",
   "version": "18.17.0",
   "description": "SmartBackup",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "start": "node index.js --env=production",
+    "start": "node index.ts --env=production",
     "start:dev": "ts-node -r tsconfig-paths/register ./src"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.1",
-    "pg": "^8.13.0",
     "cookie-parser": "^1.4.5",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "express": "^4.21.1",
+    "http-status-codes": "^2.3.0",
+    "pg": "^8.13.0",
+    "reflect-metadata": "^0.2.2",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
-   "find": "^0.3.0",
-   "fs-extra": "^9.0.1"
- }
+    "@types/cookie-parser": "^1.4.7",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.7",
+    "find": "^0.3.0",
+    "fs-extra": "^9.0.1",
+    "typescript": "^5.6.3"
+  }
 }

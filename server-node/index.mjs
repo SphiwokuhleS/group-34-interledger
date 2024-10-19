@@ -1,6 +1,7 @@
 // server.mjs
 import { createServer } from 'node:http';
-import { createAuthenticatedClient, isPendingGrant } from "@interledger/open-payments";
+import { createAuthenticatedClient, isPendingGrant, isFinalizedGrant } from "@interledger/open-payments";
+import readline from "readline/promises";
 
 const WALLET_ADDRESS  = "https://ilp.interledger-test.dev/yee"
 
@@ -61,16 +62,20 @@ const incomingPayment = await client.incomingPayment.create(
             assetCode: "EUR",
             assetScale: 2,
         },
-        expiresAt: new Date(Date.now() + 60_000 * 10).toISOString(),
+        expiresAt: new Date(Date.now() + 60_000 * 5).toISOString(),
     },
 );
 
 console.log("sphe");
 console.log(incomingPayment.id);
 
+const meltWallet = await client.walletAddress.get({
+    url: "https://ilp.interledger-test.dev/melt",
+});
+
 const grantQoute = await client.grant.request(
     {
-        url: walletAddress.authServer,
+        url: meltWallet.authServer,
     },
     {
         access_token: {
@@ -84,12 +89,14 @@ const grantQoute = await client.grant.request(
     },
 );
 
-console.log(grantQoute);
+console.log("GRANT_Q_TOKEN");
+console.log(grantQoute.continue.access_token.value);
+console.log("HERESPHE:", grant.access_token.manage)
 
 const quote = await client.quote.create(
     {
         url: new URL("https://ilp.interledger-test.dev/melt").origin,
-        accessToken: grant.access_token.value,
+        accessToken: grantQoute.access_token.value,
     },
     {
         method: "ilp",
@@ -100,39 +107,73 @@ const quote = await client.quote.create(
 
 console.log(quote);
 
-const payGrant = await client.grant.request(
+const outgoingPaymentGrant = await client.grant.request(
     {
-        url: walletAddress.authServer,
+        url: meltWallet.authServer,
     },
     {
         access_token: {
             access: [
                 {
-                    identifier: walletAddress.id,
                     type: "outgoing-payment",
-                    actions: ["list", "list-all", "read", "read-all", "create"],
+                    actions: ["read", "create"],
                     limits: {
-                        debitAmount: "200",
-                        receiveAmount: incomingPayment.receivedAmount.value,
+                        debitAmount: {
+                            assetCode: quote.debitAmount.assetCode,
+                            assetScale: quote.debitAmount.assetScale,
+                            value: quote.debitAmount.value,
+                        },
                     },
+                    identifier: meltWallet.id,
                 },
             ],
         },
         interact: {
             start: ["redirect"],
-            finish: {
-                method: "redirect",
-                uri: "https://google.com",
-                //nonce: NONCE,
-            },
         },
-    },
+    }
 );
 
-console.log(payGrant);
+console.log(outgoingPaymentGrant.continue.uri);
+
+let finalizedOutgoingPaymentGrant;
+await readline
+    .createInterface({ input: process.stdin, output: process.stdout })
+    .question("\nPlease accept grant and press enter...");
+
+try {
+    finalizedOutgoingPaymentGrant = await client.grant.continue({
+        url: outgoingPaymentGrant.continue.uri,
+        accessToken: outgoingPaymentGrant.continue.access_token.value,
+    });
+} catch (err) {
+    console.error(err);
+}
+
+if (!isFinalizedGrant(finalizedOutgoingPaymentGrant)) {
+    console.log(
+        "There was an error continuing the grant. You probably have not accepted the grant at the url."
+    );
+}
 
 
 
+console.log(finalizedOutgoingPaymentGrant.continue.uri);
+
+
+const outgoingPayment = await client.outgoingPayment.create(
+    {
+        url: meltWallet.resourceServer,
+        accessToken: finalizedOutgoingPaymentGrant.access_token.value,
+    },
+    {
+        walletAddress: meltWallet.id,
+        quoteId: quote.id,
+    }
+);
+
+console.log(outgoingPayment.id);
+//
 // starts a simple http server locally on port 3000
 server.listen(3001, '127.0.0.1', () => {
     console.log('Listening on 127.0.0.1:3001');
