@@ -1,4 +1,7 @@
-﻿
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using group_34_interledger_API.Models.ApplicationUser;
 
 namespace group_34_interledger_API
 {
@@ -28,3 +31,4 @@ namespace group_34_interledger_API
             modelBuilder.HasDefaultSchema(_schema);
         }
     }
+}
