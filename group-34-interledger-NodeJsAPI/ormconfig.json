@@ -8,17 +8,17 @@
     "password": "admin",
     "database": "app",
     "entities": [
-       "src/entities/**/*.ts"
+       "src/database/entities/**/*.ts"
     ],
     "cli": {
-       "entitiesDir": "src/entities",
-       "migrationsDir": "src/migration",
-       "subscribersDir": "src/subscriber"
+       "entitiesDir": "src/database/entities",
+       "migrationsDir": "src/database/migrations",
+       "subscribersDir": "src/database/subscriber"
      },
     "migrations": [
-       "src/migration/**/*.ts"
+       "src/database/migrations/**/*.ts"
     ],
     "subscribers": [
-       "src/subscriber/**/*.ts"
+       "src/database/subscriber/**/*.ts"
      ]
  }

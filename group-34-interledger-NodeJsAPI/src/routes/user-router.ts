@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { getManager } from 'typeorm';
-import { User } from '../database/entities/User';
+import { User } from '../database/entities/user';
 
 const router = Router();
 
