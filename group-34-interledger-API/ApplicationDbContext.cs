@@ -19,6 +19,7 @@ namespace group_34_interledger_API
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //optionsBuilder.UseNpgsql("Host=127.0.0.1;Port=5432;Database=app;Username=admin;Password=admin;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,5 +27,8 @@ namespace group_34_interledger_API
             base.OnModelCreating(modelBuilder);
             modelBuilder.HasDefaultSchema(_schema);
         }
+
+        public DbSet<FileMetaData> FileMetaDatas { get; set; }
+        public DbSet<FileAccessed> FileAccesseds { get; set; }
     }
 }
