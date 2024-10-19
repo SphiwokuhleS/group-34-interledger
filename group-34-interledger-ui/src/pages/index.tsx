@@ -1,22 +1,70 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+'use client'
 
-const Home: React.FC = () => {
+import React, { useState } from 'react'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Header } from "@/components/ui/home-page-components/header.component"
+import { RegistrationForm } from "@/components/ui/home-page-components/registration-form.component"
+// import { FileUpload } from "@/components/ui/home-page-components/file-upload.component"
+import { FeaturesList } from "@/components/ui/home-page-components/features-list.component"
+import { UserModel } from '@/models/user-model'
+
+export default function HomePage() {
+  const [user, setUser] = useState<UserModel>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    billingSchedule: '',
+    walletAddress: ''
+  });
+  const [isRegistered, setIsRegistered] = useState(false)
+  const [files, setFiles] = useState([])
+
+  const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (user.firstName && user.billingSchedule) {
+      setIsRegistered(true)
+    }
+  }
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // const uploadedFiles = Array.from(e.target.files)
+    // setFiles([...files, ...uploadedFiles])
+    console.log("uploadedFiles")
+  }
+
   return (
-    <div className="min-h-screen px-8 flex flex-col justify-center items-center">
-      <main className="flex-1 flex flex-col justify-center items-center">
-        <h1 className="text-blue-500">Welcome to Our Landing Page</h1>
-        <p className="text-gray-800">This is a sample paragraph.</p>
-      </main>
-      <footer className="w-full p-4 text-center bg-gray-900 text-white">
-        <Link href="/profile" passHref>
-          <Button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition">
-            Go to Profile
-          </Button>
-        </Link>
-      </footer>
-    </div>
-  );
-};
+    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-white p-8">
+      <Header />
 
-export default Home;
+      <div className="max-w-4xl mx-auto grid gap-8 md:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle>Get Started</CardTitle>
+            <CardDescription>Create your account and start backing up</CardDescription>
+          </CardHeader>
+          <CardContent>
+            {!isRegistered ? (
+              <RegistrationForm user={user} setUser={setUser} onSubmit={handleRegister} />
+            ) : (
+              <div className="space-y-4">
+                <p className="text-green-600 font-semibold">Welcome, {user.firstName}!</p>
+                <p>Your billing schedule: {user.billingSchedule}</p>
+                {/* <FileUpload onFileUpload={handleFileUpload} files={files} /> */}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Why Choose SmartBackup?</CardTitle>
+            <CardDescription>Flexible, affordable, and secure cloud storage</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <FeaturesList />
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  )
+}
