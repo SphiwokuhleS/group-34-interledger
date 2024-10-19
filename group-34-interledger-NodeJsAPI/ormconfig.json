@@ -1,11 +1,17 @@
 {
     "synchronize": true,
     "logging": false,
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "admin",
+    "password": "admin",
+    "database": "app",
     "entities": [
        "src/entities/**/*.ts"
     ],
     "cli": {
-       "entitiesDir": "src/entity",
+       "entitiesDir": "src/entities",
        "migrationsDir": "src/migration",
        "subscribersDir": "src/subscriber"
      },
