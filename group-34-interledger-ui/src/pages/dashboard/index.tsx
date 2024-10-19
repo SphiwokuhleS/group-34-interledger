@@ -37,46 +37,50 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="container mx-auto py-10">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">File Dashboard</h1>
-        <UploadModal>
-          <Button>
-            <UploadIcon className="mr-2 h-4 w-4" /> Upload File
-          </Button>
-        </UploadModal>
-      </div>
-
-      {files.length === 0 ? (
-        <Card>
-          <CardContent className="flex flex-col items-center justify-center h-64">
-            <FileIcon className="h-16 w-16 text-gray-400 mb-4" />
-            <p className="text-xl text-gray-600">No files uploaded yet</p>
-          </CardContent>
-        </Card>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {files.map((file) => (
-            <Card key={file.id}>
-              <CardHeader>
-                <CardTitle>{file.name}</CardTitle>
-                <CardDescription>{file.type}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-gray-500">Size: {file.size} bytes</p>
-                <p className="text-sm text-gray-500">
-                  Uploaded on: {new Date(file.uploaded).toLocaleDateString()}
-                </p>
-              </CardContent>
-              <CardFooter>
-                <Button variant="outline" className="w-full">
-                  Download
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
+    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-white">
+      <div className="container mx-auto py-10">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold">File Dashboard</h1>
+          <UploadModal>
+            <Button>
+              <UploadIcon className="mr-2 h-4 w-4" /> Upload File
+            </Button>
+          </UploadModal>
         </div>
-      )}
+
+        {files.length === 0 ? (
+          <Card>
+            <CardContent className="flex flex-col items-center justify-center h-64">
+              <FileIcon className="h-16 w-16 text-gray-400 mb-4" />
+              <p className="text-xl text-gray-600">No files uploaded yet</p>
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {files.map((file) => (
+              <Card key={file.id}>
+                <CardHeader>
+                  <CardTitle>{file.name}</CardTitle>
+                  <CardDescription>{file.type}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-500">
+                    Size: {file.size} bytes
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    Uploaded on: {new Date(file.uploaded).toLocaleDateString()}
+                  </p>
+                </CardContent>
+                <CardFooter>
+                  <Button variant="outline" className="w-full">
+                    Download
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

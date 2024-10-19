@@ -1,27 +1,37 @@
-import React from 'react'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { RegistrationFormModel } from '@/models/registration-form-model'
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { RegistrationFormModel } from "@/models/registration-form-model";
 
-export const RegistrationForm = ({ user, setUser, onSubmit }: RegistrationFormModel) => (
+export const RegistrationForm = ({
+  user,
+  setUser,
+  onSubmit,
+}: RegistrationFormModel) => (
   <form onSubmit={onSubmit} className="space-y-4">
     <div>
       <Label htmlFor="name">First Name</Label>
-      <Input 
-        id="name" 
-        value={user.firstName} 
-        onChange={(e) => setUser({...user, firstName: e.target.value})}
+      <Input
+        id="name"
+        value={user ? user.firstName : ""}
+        onChange={(e) => setUser({ ...user, firstName: e.target.value })}
         placeholder="Enter your name"
         required
       />
     </div>
     <div>
       <Label htmlFor="lastName">Last Name</Label>
-      <Input 
-        id="lastName" 
-        value={user.lastName} 
+      <Input
+        id="lastName"
+        value={user ? user.lastName : ""}
         onChange={(e) => setUser({ ...user, lastName: e.target.value })}
         placeholder="Enter your last name"
         required
@@ -29,9 +39,9 @@ export const RegistrationForm = ({ user, setUser, onSubmit }: RegistrationFormMo
     </div>
     <div>
       <Label htmlFor="Email">Email Address</Label>
-      <Input 
-        id="emailAddress" 
-        value={user.email} 
+      <Input
+        id="emailAddress"
+        value={user ? user.email : ""}
         onChange={(e) => setUser({ ...user, email: e.target.value })}
         placeholder="Enter your last name"
         required
@@ -39,9 +49,9 @@ export const RegistrationForm = ({ user, setUser, onSubmit }: RegistrationFormMo
     </div>
     <div>
       <Label htmlFor="WalletAddress">Interledger Wallet Address</Label>
-      <Input 
-        id="walletAddress" 
-        value={user.walletAddress} 
+      <Input
+        id="walletAddress"
+        value={user ? user.walletAddress : ""}
         onChange={(e) => setUser({ ...user, walletAddress: e.target.value })}
         placeholder="Enter your last name"
         required
@@ -49,7 +59,9 @@ export const RegistrationForm = ({ user, setUser, onSubmit }: RegistrationFormMo
     </div>
     <div>
       <Label htmlFor="billing">Billing Schedule</Label>
-      <Select onValueChange={(value) => setUser({...user, billingSchedule: value})}>
+      <Select
+        onValueChange={(value) => setUser({ ...user, billingSchedule: value })}
+      >
         <SelectTrigger id="billing">
           <SelectValue placeholder="Select billing schedule" />
         </SelectTrigger>
@@ -61,6 +73,8 @@ export const RegistrationForm = ({ user, setUser, onSubmit }: RegistrationFormMo
         </SelectContent>
       </Select>
     </div>
-    <Button type="submit" className="w-full">Register</Button>
+    <Button type="submit" className="w-full">
+      Register
+    </Button>
   </form>
-)
+);
