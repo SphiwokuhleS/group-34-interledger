@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Home: React.FC = () => {
   return (
@@ -8,7 +9,11 @@ const Home: React.FC = () => {
         <p className="text-gray-800">This is a sample paragraph.</p>
       </main>
       <footer className="w-full p-4 text-center bg-gray-900 text-white">
-        <Button className="bg-white">Shadcn Button</Button>
+        <Link href="/profile" passHref>
+          <Button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition">
+            Go to Profile
+          </Button>
+        </Link>
       </footer>
     </div>
   );
