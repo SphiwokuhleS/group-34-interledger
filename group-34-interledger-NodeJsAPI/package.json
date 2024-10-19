@@ -1,0 +1,15 @@
+{
+  "name": "group-34-interkedger-nodejsapi",
+  "version": "18.17.0",
+  "description": "SmartBackup",
+  "main": "index.js",
+  "scripts": {
+    "test": "run test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1",
+    "pg": "^8.13.0"
+  }
+}
