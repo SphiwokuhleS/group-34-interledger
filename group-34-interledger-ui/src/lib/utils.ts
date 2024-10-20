@@ -12,7 +12,6 @@ export function completeUser(user: UserModel) {
     !!user.lastName &&
     !!user.email &&
     !!user.walletAddress &&
-    !!user.billingSchedule &&
-    !!user.registered
+    !!user.billingSchedule
   );
 }
