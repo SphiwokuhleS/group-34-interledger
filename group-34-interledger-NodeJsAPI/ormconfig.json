@@ -7,18 +7,13 @@
     "username": "admin",
     "password": "admin",
     "database": "app",
-    "entities": [
-       "src/database/entities/**/*.ts"
-    ],
+    "entities": ["dist/database/entities/*.js"],  
+    "migrations": ["dist/database/migrations/*.js"],
+    "subscribers": ["dist/subscribers/*.js"],
     "cli": {
        "entitiesDir": "src/database/entities",
        "migrationsDir": "src/database/migrations",
        "subscribersDir": "src/database/subscriber"
-     },
-    "migrations": [
-       "src/database/migrations/**/*.ts"
-    ],
-    "subscribers": [
-       "src/database/subscriber/**/*.ts"
-     ]
+     }
+    
  }

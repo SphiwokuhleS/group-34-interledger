@@ -1,19 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es2018",
-    "module": "commonjs",
+    "target": "ES2018",              // Target a modern JavaScript version
+    "module": "ESNext",              // Compile to ES modules
     "lib": ["es2018", "esnext.asynciterable"],
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,  // Enable TypeORM decorators
+    "emitDecoratorMetadata": true,   // Emit metadata for decorators
     "moduleResolution": "node",
-    "outDir": "./dist",
-    "rootDir": "./src",
+    "outDir": "./dist",              // Output compiled files to dist
+    "rootDir": "./",              // Set root directory for source files
     "strict": true,
     "strictPropertyInitialization": false,
-    "esModuleInterop": true,
+    "esModuleInterop": true,         // Enable compatibility with CommonJS
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "index.ts"],
   "exclude": ["node_modules", "dist"]
 }

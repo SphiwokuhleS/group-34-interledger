@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn } from 'typeorm';
-import { FileAccessed } from './file-accessed';
+import { FileAccessed } from './file-accessed.js';
 
 export enum FileTypes {
     Photo = 0,

@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { getManager } from 'typeorm';
-import { User } from '../database/entities/user';
+import { User } from '../database/entities/user.js';
 
 const router = Router();
 
@@ -19,4 +19,4 @@ router.get('/all', async (req: Request, res: Response) => {
     }
 });
 
-export = router;
+export default router;

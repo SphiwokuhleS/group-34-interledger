@@ -2,11 +2,13 @@
   "name": "group-34-interkedger-nodejsapi",
   "version": "18.17.0",
   "description": "SmartBackup",
-  "main": "index.ts",
+  "main": "dist/index.js",
+  "type": "module",
+  
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js --env=production",
-    "start:dev": "ts-node -r tsconfig-paths/register ./src",
+    "start:dev": "ts-node -r tsconfig-paths/register ./index.ts",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
   },
   "author": "",

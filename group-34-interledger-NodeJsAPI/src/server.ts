@@ -1,8 +1,6 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import { StatusCodes } from 'http-status-codes';
-import UserRouter from './routes/user-router';
-import { intializeDB } from './database/database-init';
+import UserRouter from './routes/user-router.js';
 
 const app = express();
 app.use(express.json());
