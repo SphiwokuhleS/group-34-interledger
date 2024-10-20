@@ -25,3 +25,11 @@ Here are some of the libraries we have used within the project
 - [tailwindcss](https://tailwindcss.com/)
 - [lucidereact](https://lucide.dev/guide/packages/lucide-react)
 - [radixui](https://www.radix-ui.com/)
+
+
+### TODO
+
+Integrate with our created API to achieve the following
+- POST user information from the registration form
+- GET the user's stored file metadata
+- POST files
